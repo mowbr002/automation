@@ -1,0 +1,98 @@
+<fieldset id="form_fieldset" disabled="disabled" class="form_fieldset">
+			<div id="container" class="container">
+				<div id="db_backup_step" class="db_backup_step todo_step">
+					<div id="inactive_notifier" class="notifier">&nbsp;</div>
+					<div id="vtm_contact">
+						<label for="vtm_contact_name">Vtm admin:</label>
+						<span class="vtm_contact_name" type="text" id="vtm_contact_name"></span>
+					</div>
+					<div id="db_wrap" class="db_wrap">
+						<div id="lables" class="labels">
+							<!-- <p><label>Mode:</label> -->
+							<p><label>Available sites:&nbsp;</label>
+							<p><label>User:</label>
+							<p><label>Database:</label>
+						</div>
+						<div id="fields" class="fields">
+							<p></p>
+							<!-- <p><input id="mode_test" type="radio" name="mode" value="test" checked="checked"><label for="mode_test">Testing</label>
+							<input id="mode_prod" type="radio" name="mode" value="prod"><label for="mode_prod">Production</label> -->
+							<p>
+							
+							<select name="site" id="site" onchange="updateDBList(); getSiteParams();">
+								<option>--</option>
+							</select>
+							
+							<p>
+								<select name="username" id="username"></select>
+							<p><select id="dbase" onchange="fillSite();">
+							</select>
+						</div>
+						<div id="status" class="status">
+							<h4>Last updated:</h4>
+							<p><label for="last_updated_staging">Staging: </label><input onchange="onchangeStagingDate()" type="text" id="last_updated_staging">
+							<input id="alt_staging_updated" type="hidden">
+							<p><label for="last_updated_prod">Prod: </label><input onchange="onchangeProdDate()" type="text" id="last_updated_prod">
+							<input id="alt_prod_updated" type="hidden">
+							<p>
+							<label for="queued">Update queued: </label>
+							<input id="queued" type="checkbox" onchange="onchangeQueued()">
+						</div>
+					</div>
+					<!-- <button type="button" style="display: none;" id="db_backup_do" onclick="doDbBackup(); return false;">Backup DB</button>
+					<button type="button" style="display: none;" id="skip_db_backup" onclick="moveStepToDone('db_backup_step'); return false;">Next Step</button> -->
+					<div class="staging_cms" id="staging_cms">
+							<h4>Staging:</h4>
+							
+							<p><label for="cmss">CMS: </label><select id="cmss"></select> <label id="cmss_vers"></label>&nbsp;
+							<!-- <button type="button" onclick="updateRecordedStagingToLatest()" title="Update to latest cms" id="set_latest">
+								Set staging CMS version to latest
+							</button> -->
+							<p><label>Staging site: </label><input class="site_fields" type="text" disabled="disabled" id="staging_site">
+							
+							<p><label for="update_cms_v">Update CMS version to: </label><select id="update_cmss_v"></select>
+							<!-- <button type="button" id="staging_bacup_do" onclick="doCmsBackup('staging'); return false;">Backup Staging</button> -->
+							<div id="plugins" class="plugins">
+								<ul id="plugin_list" class="plugin_list">
+								</ul>
+							</div>
+						</div>
+						<div class="prod_cms" id="prod_cms">
+							<h4>Production:</h4>
+							
+							<p><label for="cms">CMS: </label><select id="cms"></select> <label id="cms_vers"></label>
+							<!-- <button type="button" onclick="updateRecordedProdToLatest()" title="Update to latest cms" id="set_latest">
+								Set prod CMS version to latest
+							</button> -->
+							<p><label>Site: </label><input class="site_fields" type="text" disabled="disabled" id="production_site">
+							
+							<p><label for="update_cms_v">Update CMS version to: </label><select id="update_cms_v"></select>
+							<!-- <button type="button" id="production_bacup_do" style="display: none;" onclick="doCmsBackup('production'); return false;">Backup Production</button> -->
+						</div>
+					<div id="backup_log" class="backup_log">
+							<h4>Previous backups for: <span id="db_name"></span></h4>
+							<ul id="backups_ul"></ul>
+					</div>
+				</div>
+				<div id="cms_backup_step" class="cms_backup_step todo_step">
+					
+					<div id="secondary_controls" class="hidden">
+						<h3>Backup CMS files:</h3>
+						<div id="swap_div" class="swap_div">
+						&nbsp;
+						</div>
+						
+						<div id="skip_cms" class="skip_cms">
+							<!-- <button type="button" onclick="skipCmsBackup(); return false;">Skip this step</button> -->
+						</div>
+					</div>
+				</div>
+				<div id="cms_update_step" class="cms_update_step todo_step" style="display: none;">
+					<h3>Update the staging CMS:</h3>
+					<label>Drop staging db:</label><!-- <button disabled="disabled">Drop staging db</button> -->
+					<label>Copy production to staging:</label><!-- <button onclick="doDbCopy(); return false;">Copy production</button> -->
+					<label>Drush up:</label><!-- <button disabled="disabled">Drush up --security-only</button> -->
+				</div>
+				<div id="completed_steps" class="done_column"></div>
+			</div>
+		</fieldset>

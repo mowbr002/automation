@@ -1,0 +1,150 @@
+<!Doctype html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> -->
+	<link rel="stylesheet" href="assets/custom_theme/jquery-ui.min.css" >
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script type="text/javascript">
+		_sites_json =	{{ data.sites|raw }};
+	</script>
+	<script>
+		_users_json	=	{{ data.users|raw }};
+	</script>
+	<script>
+		_cms_v_json = 	{{ data.cmsvs|raw }};
+	</script>
+	
+	<script>
+		_update_sts = 	{{ data.updts|raw }};
+	</script>
+	
+	<script>
+		_sys_dbs_js = 	{{ data.db_ms|raw }};
+	</script>
+	
+	<script>
+		_dbs_by_did = new Object;
+	</script>
+	<script type="text/javascript">
+		_servers = {{ data.servs|raw }};
+	</script>
+	<script>
+		_cms_sys = {{ data.cmsys|raw }};
+	</script>
+	<script type="text/javascript">
+		_admins  = {{ data.vtmad|raw }};
+	</script>
+	<script>
+		_cmsvi	= {{ data.cmsvi|raw }};
+	</script>
+	<script src="http://automaton.jsm/assets/auto.js"></script>
+<link rel="stylesheet" href="http://automaton.jsm/assets/auto.css">
+</head>
+<body>
+	<input type="hidden" id="current_working_site">
+<input type="hidden" id="selected_site" />
+<h3 class="intro_banner">Web Services CMS Documentation/Backup/Update Dashboard <button type="button" onclick="addSiteDialog()">Add site</button></h3>
+<h2 class="site_descriptor"><span id="site_disp">&nbsp;</span></h2>
+<div class="wrapper">
+	<div class="inner_wrap">
+	<!-- Update Stats -->
+	{% include 'stats.html' %}
+	<!-- /Update Stats -->
+	<!-- Notes -->
+	{% include 'notes.html' %}
+	<!-- /Notes -->
+	</div>
+	<div id="form_div" class="form_div">
+		<!--  <form action="automator.php" onsubmit="preventDefault()"> -->
+		<!-- Backups -->
+		{% include 'backups.html' %}
+		<!-- /Backups -->
+		<!-- </form> -->
+	</div>
+	
+</div>
+<div id="hidden" style="display:none;"></div>
+
+<div id="rds_dbs" class="rds_dbs" style="display: none;">
+		
+</div>
+
+<div id="paste_plugins" title="Paste plugin list here" style="display: none;">
+<textarea class="plugins_text" id="plugins_list" cols="65" rows="20"></textarea>
+</div>
+<div id="add_new_site" title="Add a new site to the db">
+	<div class="new_site_info">
+		<div id="new_site_labels" class="new_site_labels">
+			<p><label for="cname">Company/Site name</label>
+			<p><label for="server_loc">Host server</label>
+			<p><label for="cms_type_new">CMS</label>
+			<p><label for="staging_cms_vers">Staging CMS Version</label>
+			<p><label for="production_cms_vers">Production CMS Version</label>
+			<p><label for="db_host_location">DB location</label>
+			<p><label for="staging_uri">Staging URI</label>
+			<p><label for="staging_db_name">Staging db name</label>
+			<p><label for="production_uri">Production URI</label>
+			<p><label for="production_db_name">Production db name</label>
+			<p><label for="git_repo">Git repo</label>
+			<p><label for="vtm_admin">VTM Admin</label>
+			
+		</div>
+		<div id="new_site_fields" class="new_site_fields">
+			<p><input type="text" id="cname">
+			<p><select id="server_loc">
+				<option>--</option>
+			</select>
+			<p><select id="cms_type_new">
+				<option>--</option>
+			</select>
+			<p><select id="staging_cms_vers">
+				<option>--</option>
+			</select>
+			<p><select id="production_cms_vers">
+				<option>--</option>
+			</select>
+			<p><select id="db_host_location">
+				<option>--</option>
+				<option val="0">localhost</option>
+				<option val="1">RDS</option>
+			</select>
+			<p><input type="text" id="staging_uri">
+			<p><input type="text" id="staging_db_name">
+			<p><input type="text" id="production_uri">
+			<p><input type="text" id="production_db_name">
+			<p><input type="text" id="git_repo">
+			<p><select id="vtm_admin">
+				<option>--</option>
+			</select>
+		</div>
+	</div>
+</div>
+{% include 'site_audit.html' %}
+<div id="autobot_message" title="Processing">
+	The autobot is processing your request...
+</div>
+
+<div id="site_lookup_info" title="Site CMS info" class="cms_info_lookup">
+	The autobot is retrieving your information...
+</div>
+
+<div id="db_copy_modal" style="display: none;">
+	<div class="flex_dbs">
+		<div class="prod_dbs">
+			<label for="prod_db_select">Production:</label>
+			<select id="prod_db_select"></select>
+		</div>
+		<div class="db_arrow">
+			&#x21d2;
+		</div>
+		<div class="stage_dbs">
+			<label for="stage_db_select">Staging:</label>
+			<select id="stage_db_select"></select>
+		</div>
+	</div>
+</div>
+<div id="login"></div>
+<div id="plugin_dialog"></div>
+</body>
+</html>

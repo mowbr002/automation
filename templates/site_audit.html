@@ -1,0 +1,37 @@
+<div id="audit_div" class="audit_div" title="Site editor">
+
+	<div id="audit_labels" class="audit_labels">
+		<label for="site_name">Site name:</label>
+		<label for="site_active">Active:</label>
+		<label for="in_dev">In development:</label>
+		<label for="admin_id">VTM Admin:</label>
+		<label for="staging_database">Staging database:</label>
+		<label for="prod_database">Prod database:</label>
+		<label for="edit_server">Server:</label>
+		<label for="staging_url">Staging URL:</label>
+		<label for="production_url">Prod URL:</label>
+		<label for="edit_cms">CMS:</label>
+		<label for="staging_cms_version">Staging CMS version:</label>
+		<label for="prod_cms_version">Prod CMS version:</label>
+	</div>
+	<div id="audit_fields" class="audit_fields">
+		<p><input type="text" id="site_name">
+		<p><select id="site_active">
+			<option value="true">Active</option>
+			<option value="false">Inactive</option>
+		</select>
+		<p><select id="in_dev">
+			<option value="true">In development</option>
+			<option value="false">Not in development</option>
+		</select>
+		<p><select id="admin_id"></select>
+		<p><select id="staging_database"></select>
+		<p><select id="prod_database"></select>
+		<p><select id="edit_server"></select>
+		<p><input type="text" id="staging_url">
+		<p><input type="text" id="production_url">
+		<p><select id="edit_cms" onchange="editCmsVersions()"></select>
+		<p><select id="staging_cms_version"></select>
+		<p><select id="prod_cms_version"></select>
+	</div>
+</div>
